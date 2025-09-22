@@ -12,7 +12,7 @@ def test_validate_task_com_dados_validos():
 # Cenário 2: Teste de falha quando o título está faltando
 def test_validate_task_sem_titulo():
     """Verifica se um ValueError é lançado quando a chave 'titulo' está ausente."""
-    tarefa_invalida = {"prioridade": "media"}
+    tarefa_invalida = {"titulo": "  aaaaa ", "prioridade": "media"}
     with pytest.raises(ValueError) as excinfo:
         validate_task(tarefa_invalida)
     # Verifica se a mensagem de erro contém o texto esperado
@@ -21,7 +21,7 @@ def test_validate_task_sem_titulo():
 # Cenário 3: Teste de falha quando o título está vazio
 def test_validate_task_com_titulo_vazio():
     """Verifica se um ValueError é lançado para um título vazio ou apenas com espaços."""
-    tarefa_invalida = {"titulo": "   ", "prioridade": "baixa"}
+    tarefa_invalida = {"titulo": "  aaaaa ", "prioridade": "baixa"}
     with pytest.raises(ValueError) as excinfo:
         validate_task(tarefa_invalida)
     assert "titulo da tarefa nao pode ser vazio" in str(excinfo.value)
@@ -29,7 +29,7 @@ def test_validate_task_com_titulo_vazio():
 # Cenário 4: Teste de falha quando a prioridade está faltando
 def test_validate_task_sem_prioridade():
     """Verifica se um ValueError é lançado quando a chave 'prioridade' está ausente."""
-    tarefa_invalida = {"titulo": "Fazer o exercicio"}
+    tarefa_invalida = {"titulo": "Fazer o exercicio", "prioridade": "baixa"}
     with pytest.raises(ValueError) as excinfo:
         validate_task(tarefa_invalida)
     assert "deve conter uma chave 'prioridade'" in str(excinfo.value)
@@ -37,7 +37,7 @@ def test_validate_task_sem_prioridade():
 # Cenário 5: Teste de falha com uma prioridade inválida
 def test_validate_task_com_prioridade_invalida():
     """Verifica se um ValueError é lançado para uma prioridade inválida."""
-    tarefa_invalida = {"titulo": "Corrigir o bug", "prioridade": "urgente"}
+    tarefa_invalida = {"titulo": "Corrigir o bug"}
     with pytest.raises(ValueError) as excinfo:
         validate_task(tarefa_invalida)
     assert "Prioridade 'urgente' invalida" in str(excinfo.value)
