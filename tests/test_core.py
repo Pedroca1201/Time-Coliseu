@@ -21,7 +21,7 @@ def test_nao_criar_despesa_com_valor_negativo():
     with pytest.raises(ValidationError) as excinfo:
         Expense(id=2, description="Invalido", amount=-100, category="Teste", date=date.today())
     # Verifica se a mensagem de erro da Pydantic informa sobre o valor
-    assert "ensure this value is greater than 0" in str(excinfo.value)
+    assert "Input should be greater than 0" in str(excinfo.value)
 
 def test_nao_criar_despesa_com_descricao_curta():
     """Testa que a descrição deve ter pelo menos 3 caracteres."""
