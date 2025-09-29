@@ -1,4 +1,3 @@
-# requirements.txt
 pydantic
 pytest
 pytest-mock
